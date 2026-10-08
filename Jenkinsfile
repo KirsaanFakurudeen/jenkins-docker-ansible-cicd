@@ -9,7 +9,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/KirsaanFakurudeen/jenkins-docker-ansible-cicd.git'
+                git branch: 'main', url: 'https://github.com/KirsaanFakurudeen/jenkins-docker-ansible-cicd.git'
             }
         }
 
@@ -51,6 +51,7 @@ pipeline {
         success {
             echo 'CI/CD Pipeline completed successfully!'
         }
+
         failure {
             echo 'CI/CD Pipeline failed.'
         }
