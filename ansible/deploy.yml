@@ -1,0 +1,25 @@
+---
+- name: Deploy application
+  hosts: deployment
+  become: true
+
+  tasks:
+
+    - name: Pull Docker image
+      community.docker.docker_image:
+        name: kirsaan/cicd-demo:latest
+        source: pull
+
+    - name: Stop existing container
+      community.docker.docker_container:
+        name: cicd-demo
+        state: absent
+
+    - name: Start application container
+      community.docker.docker_container:
+        name: cicd-demo
+        image: kirsaan/cicd-demo:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "80:80"
